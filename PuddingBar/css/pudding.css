@@ -1,0 +1,133 @@
+.menu {
+	width: 100%;
+	height: 80px;
+	margin: auto;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	/*-webkit-filter: url("#goo");
+	filter: url("../menu.html#goo");
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);*/
+}
+
+.menu-wrapper {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	left: 0;
+	bottom: -40px;
+	background-color: #161F35;
+}
+
+.menu-toggle-button,
+.menu-item-bounce,
+.menu-item-button {
+	background: #1DA2FF;
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
+	margin-left: -40px;
+	margin-top: -40px;
+	color: #fff;
+	border: none;
+	outline: none;
+	position: relative;
+}
+
+.menu-toggle-button {
+	background: transparent;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -40px;
+	cursor: pointer;
+}
+
+.menu-toggle-icon {
+	font-size: 30px;
+	position: absolute;
+	top: 15px;
+	left: 50%;
+	margin-left: -40px;
+	width: 80px;
+	height: 80px;
+	line-height: 80px;
+}
+
+.menu-items {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	left: 50%;
+	top: 15px;
+	-webkit-filter: url("#goo");
+	filter: url("../menu.html#goo");
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+.menu-item {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+}
+
+.menu-item-bounce {
+	position: absolute;
+	top: 0;
+	left: 50%;
+}
+
+.menu-item-button {
+	width: 40px;
+	height: 40px;
+	margin-left: -20px;
+	margin-top: -20px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	color: #fff;
+	cursor: pointer;
+}
+
+.menu-item-button:hover {
+	color: #fff;
+}
+
+.menu-lists{
+	position: absolute;
+	width: 440px;
+	height: 40px;
+	top: -5px;
+	left: 50%;
+	margin-left: -220px;
+	padding: 0;
+}
+
+.menu-list-left,
+.menu-list-right{
+	width: 80px;
+	height: 40px;
+	list-style-type: none;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}
+
+.list-padding-left{
+	padding-left: 60px;
+}
+
+.list-padding-right{
+	padding-right: 60px;
+}
+
+.menu-lists i{
+	width: 100%;
+	height: 100%;
+	color: #fff;
+}
