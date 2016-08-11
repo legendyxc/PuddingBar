@@ -1,3 +1,8 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
 .menu {
 	width: 100%;
 	height: 80px;
@@ -33,6 +38,9 @@
 	border: none;
 	outline: none;
 	position: relative;
+	transition: background .5s;
+	-webkit-transition: background .5s;
+	z-index: 1;
 }
 
 .menu-toggle-button {
@@ -118,6 +126,20 @@
 	cursor: pointer;
 }
 
+.menu-list-back{
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background-color: #1DA2FF;
+	list-style-type: none;
+	bottom: -5px;
+	position: absolute;
+	left:50%;
+	margin-left: -40px;
+	transition: background .5s;
+	-webkit-transition: background .5s;
+}
+
 .list-padding-left{
 	padding-left: 60px;
 }
@@ -130,4 +152,39 @@
 	width: 100%;
 	height: 100%;
 	color: #fff;
+}
+
+.ball{
+	position: absolute;
+	float: left;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	cursor: pointer;
+	border: none;
+}
+
+.ball-orange{
+	position: absolute;
+	background-color: #ff9800;
+}
+
+.ball-yellow{
+	position: absolute;
+	background-color: #ffeb3b;
+}
+
+.ball-green{
+	position: absolute;
+	background-color: #4caf50;
+}
+
+.ball-bluegrey{
+	position: absolute;
+	background-color: #607d8b;
+}
+
+.ball-purple{
+	position: absolute;
+	background-color: #9c27b0;
 }
