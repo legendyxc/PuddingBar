@@ -17,6 +17,7 @@ $(document).ready(function() {
 			transform: "rotate(" + (-angle) + "deg)"
 		});
 	});
+	//定位颜色小球
 	$(".ball-orange").css({
 		"left": -$(document).width() / 2 + "px",
 		"top": -$(document).height() / 2 - 105 + "px"
@@ -58,59 +59,84 @@ $(document).ready(function() {
 		event.preventDefault();
 		event.stopPropagation();
 	});
-	$(".ball").on("mousedown", function(event){
+	$(".ball").on("mousedown", function(event) {
 		var $ball;
 		var height = 0;
 		var color;
+		var yTop;
 		switch(event.currentTarget.className) {
 			case "ball ball-orange":
 				$ball = $(".ball-orange");
-				height = 90;
 				color = "#ff9800";
+				yTop = $ball[0].offsetTop;
+				height = $(document).height() + yTop;
 				break;
 			case "ball ball-yellow":
 				$ball = $(".ball-yellow");
-				height = 45;
 				color = "#ffeb3b";
+				yTop = $ball[0].offsetTop;
+				height = $(document).height() + yTop;
 				break;
 			case "ball ball-green":
 				$ball = $(".ball-green");
-				height = 0;
 				color = "#4caf50";
+				yTop = $ball[0].offsetTop;
+				height = $(document).height() + yTop;
 				break;
 			case "ball ball-bluegrey":
 				$ball = $(".ball-bluegrey");
-				height = -45;
 				color = "#607d8b";
+				yTop = $ball[0].offsetTop;
+				height = $(document).height() + yTop;
 				break;
 			case "ball ball-purple":
 				$ball = $(".ball-purple");
-				height = -90;
 				color = "#9c27b0";
+				yTop = $ball[0].offsetTop;
+				height = $(document).height() + yTop;
 				break;
 		}
+		
+		TweenMax.to($ball, 2.4, {
+				y: -yTop - 40,
+				onStart: function() {
+					TweenMax.to($ball, 3, {
+						x: $(document).width() / 2,
+					});
+				},
+				onComplete: function() {
+					TweenMax.fromTo($ball, 2.2, {
+						x: 0,
+						y: -height
+					}, {
+						y: 0,
+						x: 0,
+						onComplete: function() {
+							$ball.css({
+								"left": -$(document).width() / 2 + "px",
+								"transform": "none"
+							})
+						},
+						ease: Bounce.easeOut
+					});
+				},
+				ease: Bounce.easeOut
+			})
 
-		TweenMax.to($ball, 2.2, {
-			y: $(document).height() / 2 + height,
-			onStart: function(){$ball.animate({left: -20}, 3000);},
-			onComplete: function(){$ball.css({visibility: "hidden"})},
-			ease: Bounce.easeOut
-		})
-
-		TweenMax.set([$(".menu-item-button")[0], $(".menu-list-back")], {
-			delay: 1.8,
+		TweenMax.set($(".menu-item-button")[0], {
+			delay: 1.6,
 			background: color
 		})
 		TweenMax.set([$(".menu-item-bounce"), $(".menu-list-back")], {
-			delay: 2,
+			delay: 1.8,
 			background: color
 		})
 		TweenMax.set($(".menu-item-button")[1], {
-			delay: 2.1,
+			delay: 1.9,
 			background: color
 		})
 		TweenMax.set($(".menu-item-button")[2], {
-			delay: 2.2,
+			delay: 2.0,
 			background: color
 		})
 	});

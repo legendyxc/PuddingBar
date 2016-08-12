@@ -10,10 +10,6 @@ body{
 	bottom: 0;
 	left: 0;
 	position: fixed;
-	/*-webkit-filter: url("#goo");
-	filter: url("../menu.html#goo");
-	-webkit-transform: translateZ(0);
-	transform: translateZ(0);*/
 }
 
 .menu-wrapper {
