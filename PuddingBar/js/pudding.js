@@ -18,27 +18,38 @@ $(document).ready(function() {
 		});
 	});
 	//定位颜色小球
+	$(".ball-white").css({
+		"left": -$(document).width() / 2 + "px",
+		"top": -$(document).height() / 2 + "px"
+	});
 	$(".ball-orange").css({
 		"left": -$(document).width() / 2 + "px",
-		"top": -$(document).height() / 2 - 105 + "px"
+		//		"top": -$(document).height() / 2 - 105 + "px"
+		"top": -$(document).height() / 2 + "px"
 	});
 	$(".ball-yellow").css({
 		"left": -$(document).width() / 2 + "px",
-		"top": -$(document).height() / 2 - 60 + "px"
+		//		"top": -$(document).height() / 2 - 60 + "px"
+		"top": -$(document).height() / 2 + "px"
 	});
 	$(".ball-green").css({
 		"left": -$(document).width() / 2 + "px",
-		"top": -$(document).height() / 2 - 15 + "px"
+		//		"top": -$(document).height() / 2 - 15 + "px"
+		"top": -$(document).height() / 2 + "px"
 	});
 	$(".ball-bluegrey").css({
 		"left": -$(document).width() / 2 + "px",
-		"top": -$(document).height() / 2 + 30 + "px"
+		//		"top": -$(document).height() / 2 + 30 + "px"
+		"top": -$(document).height() / 2 + "px"
 	});
 	$(".ball-purple").css({
 		"left": -$(document).width() / 2 + "px",
-		"top": -$(document).height() / 2 + 75 + "px"
+		//		"top": -$(document).height() / 2 + 75 + "px"
+		"top": -$(document).height() / 2 + "px"
 	});
 	var on = false;
+	var open = false;
+	var mark = true;
 
 	$(".menu-toggle-button").mousedown(function() {
 		TweenMax.to($(".menu-toggle-icon"), 0.1, {
@@ -59,7 +70,40 @@ $(document).ready(function() {
 		event.preventDefault();
 		event.stopPropagation();
 	});
+	$(".ball-white").on("mousedown", function(event) {
+		if(mark === true) {
+			open = !open;
+			mark = false;
+			TweenMax.to($('.ball-orange'), 1, {
+				delay: 0.2,
+				y: open ? -45 : 0,
+				ease: Elastic.easeOut.config(1, 0.2)
+			});
+			TweenMax.to($('.ball-yellow'), 1, {
+				delay: 0.2,
+				y: open ? -90 : 0,
+				ease: Elastic.easeOut.config(1, 0.2)
+			});
+			TweenMax.to($('.ball-bluegrey'), 1, {
+				delay: 0.2,
+				y: open ? 45 : 0,
+				ease: Elastic.easeOut.config(1, 0.2)
+			});
+			TweenMax.to($('.ball-purple'), 1, {
+				delay: 0.2,
+				y: open ? 90 : 0,
+				ease: Elastic.easeOut.config(1, 0.2),
+				onComplete: function(){mark = true;}
+			});
+			TweenMax.to($('.ball-white'), 1, {
+				y: open ? 145 : 0,
+				rotation: open ? 765 : 0,
+				ease: Quint.easeInOut
+			});
+		};
+	});
 	$(".ball").on("mousedown", function(event) {
+		mark = false;
 		var $ball;
 		var height = 0;
 		var color;
@@ -68,60 +112,61 @@ $(document).ready(function() {
 			case "ball ball-orange":
 				$ball = $(".ball-orange");
 				color = "#ff9800";
-				yTop = $ball[0].offsetTop;
-				height = $(document).height() + yTop;
+				yTop = -90;
+				height = $(document).height();
 				break;
 			case "ball ball-yellow":
 				$ball = $(".ball-yellow");
 				color = "#ffeb3b";
-				yTop = $ball[0].offsetTop;
-				height = $(document).height() + yTop;
+				yTop = -45;
+				height = $(document).height();
 				break;
 			case "ball ball-green":
 				$ball = $(".ball-green");
 				color = "#4caf50";
-				yTop = $ball[0].offsetTop;
-				height = $(document).height() + yTop;
+				yTop = 0;
+				height = $(document).height();
 				break;
 			case "ball ball-bluegrey":
 				$ball = $(".ball-bluegrey");
 				color = "#607d8b";
-				yTop = $ball[0].offsetTop;
-				height = $(document).height() + yTop;
+				yTop = 45;
+				height = $(document).height();
 				break;
 			case "ball ball-purple":
 				$ball = $(".ball-purple");
 				color = "#9c27b0";
-				yTop = $ball[0].offsetTop;
-				height = $(document).height() + yTop;
+				yTop = 90;
+				height = $(document).height();
 				break;
 		}
-		
+
 		TweenMax.to($ball, 2.4, {
-				y: -yTop - 40,
-				onStart: function() {
-					TweenMax.to($ball, 3, {
-						x: $(document).width() / 2,
-					});
-				},
-				onComplete: function() {
-					TweenMax.fromTo($ball, 2.2, {
-						x: 0,
-						y: -height
-					}, {
-						y: 0,
-						x: 0,
-						onComplete: function() {
-							$ball.css({
-								"left": -$(document).width() / 2 + "px",
-								"transform": "none"
-							})
-						},
-						ease: Bounce.easeOut
-					});
-				},
-				ease: Bounce.easeOut
-			})
+			y: -$ball[0].offsetTop - 40,
+			onStart: function() {
+				TweenMax.to($ball, 3, {
+					x: $(document).width() / 2,
+				});
+			},
+			onComplete: function() {
+				TweenMax.fromTo($ball, 2.2, {
+					x: 0,
+					y: -height + yTop
+				}, {
+					y: yTop,
+					x: 0,
+					onComplete: function(){mark = true;},
+					//						onComplete: function() {
+					//							$ball.css({
+					//								"left": -$(document).width() / 2 + "px",
+					//								"transform": "none"
+					//							})
+					//						},
+					ease: Bounce.easeOut
+				});
+			},
+			ease: Bounce.easeOut
+		})
 
 		TweenMax.set($(".menu-item-button")[0], {
 			delay: 1.6,

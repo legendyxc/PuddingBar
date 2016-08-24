@@ -160,27 +160,39 @@ body{
 	border: none;
 }
 
-.ball-orange{
+.ball-white a{
+	position: relative;
+	margin-left: 6px;
+	margin-top: 5px;
+}
+
+.ball-white{
 	position: absolute;
+	float: left;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	cursor: pointer;
+	background-color: #FFFFFF;
+	z-index: 1;
+}
+
+.ball-orange{
 	background-color: #ff9800;
 }
 
 .ball-yellow{
-	position: absolute;
 	background-color: #ffeb3b;
 }
 
 .ball-green{
-	position: absolute;
 	background-color: #4caf50;
 }
 
 .ball-bluegrey{
-	position: absolute;
 	background-color: #607d8b;
 }
 
 .ball-purple{
-	position: absolute;
 	background-color: #9c27b0;
 }
