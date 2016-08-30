@@ -78,6 +78,8 @@ body{
 	left: 50%;
 	width: 0;
 	height: 0;
+	transition: transform .5s;
+	-webkit-transition: transform .5s;
 }
 
 .menu-item-bounce {
@@ -164,14 +166,14 @@ body{
 	position: relative;
 	margin-left: 6px;
 	margin-top: 5px;
-	color: #161F35;
+	color: #;
 }
 
 .ball-white{
 	position: absolute;
 	float: left;
-	width: 40px;
-	height: 40px;
+	width: 42px;
+	height: 42px;
 	border-radius: 50%;
 	cursor: pointer;
 	background-color: #FFFFFF;

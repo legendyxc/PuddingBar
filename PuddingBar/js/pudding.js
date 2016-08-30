@@ -4,9 +4,6 @@ $(document).ready(function() {
 	var distance = 80;
 	var startingAngle = 180 + (-angle / 2);
 	var slice = angle / (menuItemNum - 1);
-	var xPos = {
-		x: 0
-	};
 	TweenMax.globalTimeScale(0.8);
 	$(".menu-item").each(function(i) {
 		var angle = startingAngle + (slice * i);
@@ -19,8 +16,8 @@ $(document).ready(function() {
 	});
 	//定位颜色小球
 	$(".ball-white").css({
-		"left": -$(document).width() / 2 + "px",
-		"top": -$(document).height() / 2 + "px"
+		"left": -$(document).width() / 2 - 1 + "px",
+		"top": -$(document).height() / 2 - 1 + "px"
 	});
 	$(".ball-orange").css({
 		"left": -$(document).width() / 2 + "px",
@@ -84,6 +81,7 @@ $(document).ready(function() {
 		green = true,
 		bluegrey = true,
 		purple = true;
+//		menu-item-button-mark = new Array("close","close","close");
 
 	$(".menu-toggle-button").mousedown(function() {
 		TweenMax.to($(".menu-toggle-icon"), 0.1, {
@@ -100,6 +98,62 @@ $(document).ready(function() {
 	});
 	$(".menu-toggle-button").on("mousedown", pressHandler);
 	$(".menu-toggle-button").on("touchstart", function(event) {
+		$(this).trigger("mousedown");
+		event.preventDefault();
+		event.stopPropagation();
+	});
+	$(".menu-item").each(function(i) {
+		var $this = $(this).children(".menu-item-button");
+		var index = i;
+		$this.on("mousedown", function(event) {
+			//弹出小窗口
+			TweenMax.to($this, 0.8, {
+				onStart: function() {
+					$this.animate({
+						"border-radius": "0"
+					}, 500);
+					$this.parent().css({
+						transform: "rotate(180deg)"
+					});
+					$this.find(".menu-item-icon").addClass("fa-5x").css({
+						transform: "rotate(-180deg)"
+					});
+					//收起已弹出的窗口
+					$(".menu-item").each(function(j) {
+						var $thiss = $(this).children(".menu-item-button");
+						if(index != j){
+							TweenMax.to($thiss, 0.5, {
+								onStart: function() {
+									$thiss.animate({
+										"border-radius": "50%"
+									}, 500);
+									$thiss.parent().css({
+										transform: "rotate(" + (startingAngle + (slice * j)) + "deg)"
+									});
+									$thiss.find(".menu-item-icon").removeClass("fa-5x").css({
+										transform: "rotate(-" + (startingAngle + (slice * j)) + "deg)"
+									});
+								},
+								width: 40,
+								height: 40,
+								y: distance,
+								x: 0,
+								force3D: true,
+								ease: Quint.easeIn
+							});
+						}
+					});
+				},
+				width: 400,
+				height: 400,
+				y: 200,
+				x: -180,
+				ease: Bounce.easeOut
+			});
+		});
+	});
+
+	$(".menu-item-button").on("touchstart", function(event) {
 		$(this).trigger("mousedown");
 		event.preventDefault();
 		event.stopPropagation();
@@ -347,9 +401,24 @@ $(document).ready(function() {
 				}
 			});
 
-			TweenMax.to($(this).children(".menu-item-button"), 0.5, {
+			var $this = $(this).children(".menu-item-button");
+			TweenMax.to($this, 0.5, {
 				delay: delay,
+				onStart: function() {
+					$this.animate({
+						"border-radius": "50%"
+					}, 500);
+					$this.parent().css({
+						transform: "rotate(" + (startingAngle + (slice * i)) + "deg)"
+					});
+					$this.find(".menu-item-icon").removeClass("fa-5x").css({
+						transform: "rotate(-" + (startingAngle + (slice * i)) + "deg)"
+					});
+				},
+				width: 40,
+				height: 40,
 				y: 0,
+				x: 0,
 				force3D: true,
 				ease: Quint.easeIn
 			});
